@@ -1,0 +1,37 @@
+{
+  "tamanio_poblacion": 12,
+  "num_generaciones": 12,
+  "epocas_individuo": 5,
+  "tiempo_total_min": 93.23717572689057,
+  "mejor_cromosoma": [
+    0.001,
+    32.0,
+    1.0,
+    3.0,
+    16.0,
+    64.0,
+    64.0,
+    3.0,
+    256.0,
+    0.1
+  ],
+  "mejor_descripcion": "lr=0.001, batch=32, opt=rmsprop, capas=3, filtros=[16, 64, 64], kernel=3, neuronas=256, dropout=0.1",
+  "mejores_params": {
+    "learning_rate": 0.001,
+    "batch_size": 32,
+    "optimizador": 1,
+    "num_capas_conv": 3,
+    "num_capas_solicitadas": 3,
+    "filtros": [
+      16,
+      64,
+      64
+    ],
+    "kernel_size": 3,
+    "neuronas_densa": 256,
+    "dropout": 0.1
+  },
+  "mejor_fitness": 0.7282513546241413,
+  "mejor_val_accuracy": 0.6572499871253967,
+  "mejor_num_params": 115018
+}

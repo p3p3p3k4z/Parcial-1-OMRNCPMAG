@@ -3,7 +3,7 @@ config.py - Configuracion Global del Proyecto
 Parcial 1: Optimizacion de CNN con Algoritmos Geneticos (CIFAR-10)
 
 Proposito:
-Centralizar las constantes del experimento para evitar valores magicos 
+Centralizar las constantes del experimento para evitar valores
 dispersos por el codigo.
 
 Glosario:

@@ -39,29 +39,49 @@ def construir_red_base():
 
     Retorna el modelo de Keras compilado, listo para entrenar.
     """
-    modelo = Sequential(name="red_base_cifar10")
+    INPUT_SHAPE = config.FORMA_IMAGEN
+    FILTER1_SIZE = config.BASELINE_FILTROS_CAPA1
+    FILTER2_SIZE = config.BASELINE_FILTROS_CAPA2
+    FILTER_SHAPE = config.BASELINE_FORMA_FILTRO
+    POOL_SHAPE = config.BASELINE_FORMA_POOLING
+    FULLY_CONNECT_NUM = config.BASELINE_NEURONAS_DENSA
+    NUM_CLASSES = config.NUM_CLASES
 
-    # Bloque 1: Conv2D + MaxPooling2D
-    modelo.add(Conv2D(
-        filters=config.BASELINE_FILTROS_CAPA1,
-        kernel_size=config.BASELINE_FORMA_FILTRO,
-        activation="relu",
-        input_shape=config.FORMA_IMAGEN,
-    ))
-    modelo.add(MaxPooling2D(pool_size=config.BASELINE_FORMA_POOLING))
-
-    # Bloque 2: Conv2D + MaxPooling2D
-    modelo.add(Conv2D(
-        filters=config.BASELINE_FILTROS_CAPA2,
-        kernel_size=config.BASELINE_FORMA_FILTRO,
-        activation="relu",
-    ))
-    modelo.add(MaxPooling2D(pool_size=config.BASELINE_FORMA_POOLING))
-
-    # Capas finales de clasificacion
+    modelo = Sequential()
+    
+    modelo.add(
+        Conv2D(
+            FILTER1_SIZE,
+            FILTER_SHAPE,
+            activation='relu',
+            input_shape=INPUT_SHAPE
+        )
+    )
+    modelo.add(MaxPooling2D(POOL_SHAPE))
+    
+    modelo.add(
+        Conv2D(
+            FILTER2_SIZE,
+            FILTER_SHAPE,
+            activation='relu'
+        )
+    )
+    modelo.add(MaxPooling2D(POOL_SHAPE))
+    
     modelo.add(Flatten())
-    modelo.add(Dense(units=config.BASELINE_NEURONAS_DENSA, activation="relu"))
-    modelo.add(Dense(units=config.NUM_CLASES, activation="softmax"))
+    
+    modelo.add(
+        Dense(
+            FULLY_CONNECT_NUM,
+            activation='relu'
+        )
+    )
+    modelo.add(
+        Dense(
+            NUM_CLASSES,
+            activation='softmax'
+        )
+    )
 
     modelo.compile(
         optimizer=tf.keras.optimizers.Adam(learning_rate=config.BASELINE_TASA_APRENDIZAJE),

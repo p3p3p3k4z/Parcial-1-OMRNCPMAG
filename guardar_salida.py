@@ -25,6 +25,12 @@ import os
 import sys
 import re
 import time
+import warnings
+
+# -- Ocultar Advertencias (Warnings) ----------------------------------------
+# Evitar que los logs se inunden con avisos de informacion de TensorFlow y Python
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'  # 0=todos, 1=no INFO, 2=no INFO/WARN, 3=no INFO/WARN/ERROR
+warnings.filterwarnings('ignore')
 
 
 # -- Configuracion de rutas -------------------------------------------------

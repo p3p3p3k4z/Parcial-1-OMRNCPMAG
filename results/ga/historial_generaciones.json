@@ -1,0 +1,218 @@
+[
+  {
+    "generacion": 1,
+    "mejor_fitness": 0.6993431810393478,
+    "mejor_cromosoma": [
+      0.001,
+      32.0,
+      0.0,
+      2.0,
+      16.0,
+      16.0,
+      128.0,
+      3.0,
+      256.0,
+      0.2
+    ],
+    "descripcion": "lr=0.001, batch=32, opt=adam, capas=2, filtros=[16, 16], kernel=3, neuronas=256, dropout=0.2",
+    "tiempo_total_min": 20.33344522714615
+  },
+  {
+    "generacion": 2,
+    "mejor_fitness": 0.7025469745924978,
+    "mejor_cromosoma": [
+      0.005,
+      64.0,
+      0.0,
+      2.0,
+      16.0,
+      32.0,
+      32.0,
+      3.0,
+      64.0,
+      0.4
+    ],
+    "descripcion": "lr=0.005, batch=64, opt=adam, capas=2, filtros=[16, 32], kernel=3, neuronas=64, dropout=0.4",
+    "tiempo_total_min": 25.789531234900156
+  },
+  {
+    "generacion": 3,
+    "mejor_fitness": 0.7025469745924978,
+    "mejor_cromosoma": [
+      0.005,
+      64.0,
+      0.0,
+      2.0,
+      16.0,
+      32.0,
+      32.0,
+      3.0,
+      64.0,
+      0.4
+    ],
+    "descripcion": "lr=0.005, batch=64, opt=adam, capas=2, filtros=[16, 32], kernel=3, neuronas=64, dropout=0.4",
+    "tiempo_total_min": 31.59210231701533
+  },
+  {
+    "generacion": 4,
+    "mejor_fitness": 0.7100719715884237,
+    "mejor_cromosoma": [
+      0.001,
+      64.0,
+      0.0,
+      2.0,
+      16.0,
+      32.0,
+      16.0,
+      3.0,
+      64.0,
+      0.4
+    ],
+    "descripcion": "lr=0.001, batch=64, opt=adam, capas=2, filtros=[16, 32], kernel=3, neuronas=64, dropout=0.4",
+    "tiempo_total_min": 39.484945086638135
+  },
+  {
+    "generacion": 5,
+    "mejor_fitness": 0.7150015145952051,
+    "mejor_cromosoma": [
+      0.001,
+      64.0,
+      0.0,
+      2.0,
+      64.0,
+      16.0,
+      128.0,
+      3.0,
+      128.0,
+      0.2
+    ],
+    "descripcion": "lr=0.001, batch=64, opt=adam, capas=2, filtros=[64, 16], kernel=3, neuronas=128, dropout=0.2",
+    "tiempo_total_min": 44.53428629636765
+  },
+  {
+    "generacion": 6,
+    "mejor_fitness": 0.7242087682966751,
+    "mejor_cromosoma": [
+      0.001,
+      32.0,
+      0.0,
+      3.0,
+      64.0,
+      64.0,
+      64.0,
+      3.0,
+      64.0,
+      0.2
+    ],
+    "descripcion": "lr=0.001, batch=32, opt=adam, capas=3, filtros=[64, 64, 64], kernel=3, neuronas=64, dropout=0.2",
+    "tiempo_total_min": 49.84232931534449
+  },
+  {
+    "generacion": 7,
+    "mejor_fitness": 0.7242087682966751,
+    "mejor_cromosoma": [
+      0.001,
+      32.0,
+      0.0,
+      3.0,
+      64.0,
+      64.0,
+      64.0,
+      3.0,
+      64.0,
+      0.2
+    ],
+    "descripcion": "lr=0.001, batch=32, opt=adam, capas=3, filtros=[64, 64, 64], kernel=3, neuronas=64, dropout=0.2",
+    "tiempo_total_min": 56.8224399805069
+  },
+  {
+    "generacion": 8,
+    "mejor_fitness": 0.7242087682966751,
+    "mejor_cromosoma": [
+      0.001,
+      32.0,
+      0.0,
+      3.0,
+      64.0,
+      64.0,
+      64.0,
+      3.0,
+      64.0,
+      0.2
+    ],
+    "descripcion": "lr=0.001, batch=32, opt=adam, capas=3, filtros=[64, 64, 64], kernel=3, neuronas=64, dropout=0.2",
+    "tiempo_total_min": 61.751756457487744
+  },
+  {
+    "generacion": 9,
+    "mejor_fitness": 0.7282513546241413,
+    "mejor_cromosoma": [
+      0.001,
+      32.0,
+      1.0,
+      3.0,
+      16.0,
+      64.0,
+      64.0,
+      3.0,
+      256.0,
+      0.1
+    ],
+    "descripcion": "lr=0.001, batch=32, opt=rmsprop, capas=3, filtros=[16, 64, 64], kernel=3, neuronas=256, dropout=0.1",
+    "tiempo_total_min": 67.92500188350678
+  },
+  {
+    "generacion": 10,
+    "mejor_fitness": 0.7282513546241413,
+    "mejor_cromosoma": [
+      0.001,
+      32.0,
+      1.0,
+      3.0,
+      16.0,
+      64.0,
+      64.0,
+      3.0,
+      256.0,
+      0.1
+    ],
+    "descripcion": "lr=0.001, batch=32, opt=rmsprop, capas=3, filtros=[16, 64, 64], kernel=3, neuronas=256, dropout=0.1",
+    "tiempo_total_min": 75.35897115866344
+  },
+  {
+    "generacion": 11,
+    "mejor_fitness": 0.7282513546241413,
+    "mejor_cromosoma": [
+      0.001,
+      32.0,
+      1.0,
+      3.0,
+      16.0,
+      64.0,
+      64.0,
+      3.0,
+      256.0,
+      0.1
+    ],
+    "descripcion": "lr=0.001, batch=32, opt=rmsprop, capas=3, filtros=[16, 64, 64], kernel=3, neuronas=256, dropout=0.1",
+    "tiempo_total_min": 83.6523403207461
+  },
+  {
+    "generacion": 12,
+    "mejor_fitness": 0.7282513546241413,
+    "mejor_cromosoma": [
+      0.001,
+      32.0,
+      1.0,
+      3.0,
+      16.0,
+      64.0,
+      64.0,
+      3.0,
+      256.0,
+      0.1
+    ],
+    "descripcion": "lr=0.001, batch=32, opt=rmsprop, capas=3, filtros=[16, 64, 64], kernel=3, neuronas=256, dropout=0.1",
+    "tiempo_total_min": 93.23713979721069
+  }
+]

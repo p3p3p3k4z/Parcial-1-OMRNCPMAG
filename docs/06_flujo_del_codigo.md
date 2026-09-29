@@ -7,17 +7,20 @@ Esta guia explica como se conectan todos los modulos del proyecto, desde que eje
 ## Vision General: El Pipeline de 5 Fases
 
 ```
-python -m src.ejecutar_todo
+uv run python guardar_salida.py
          |
          v
-  ejecutar_todo.py (Orquestador)
+   guardar_salida.py (Wrapper que guarda logs en .txt)
+         |
+         v
+   ejecutar_todo.py (Orquestador principal)
     |       |       |         |
     v       v       v         v
  Fase 1  Fase 2+3  Fase 4  Fase 5
-baseline   GA    reentren. reporte
+baseline   GA    reentren. comparativa
 ```
 
-El orquestador (`ejecutar_todo.py`) llama a los demas modulos en orden. Si un archivo de resultados ya existe en disco, omite esa fase y continua desde la siguiente.
+El script `guardar_salida.py` envuelve a `ejecutar_todo.py`. El orquestador llama a los demás módulos de `src/` en orden. Si un archivo de resultados ya existe en disco, omite esa fase y continúa desde la siguiente. Una vez terminado, se puede ejecutar la fase manual del reporte LaTeX.
 
 ---
 
@@ -143,6 +146,20 @@ ejecutar_todo.py
 
 ---
 
+### Fase 6 (Manual) — Generación de Reporte LaTeX
+
+```
+uv run python reporte/crear_latex.py
+         |
+         v
+  crear_latex.py
+    ├─ Lee: resultados_base.json, resumen_ga.json, resultados_optimizado.json
+    ├─ Inyecta: Métricas y variables dentro de una plantilla técnica
+    └─ Guarda: report/reporte_tecnico.tex (Listo para compilar en PDF)
+```
+
+---
+
 ## Dependencias entre Modulos
 
 ```
@@ -196,11 +213,11 @@ report/
 Si el pipeline se interrumpe (por apagado, error de GPU, etc.), se puede reanudar simplemente ejecutando de nuevo:
 
 ```bash
-python -m src.ejecutar_todo
+uv run python guardar_salida.py
 ```
 
-El orquestador detecta que archivos JSON ya existen y omite esas fases. Solo ejecuta las que faltan. Para forzar la re-ejecucion de todo desde cero:
+El orquestador detecta que archivos JSON ya existen y omite esas fases. Solo ejecuta las que faltan. Para forzar la re-ejecucion de todo desde cero (útil si borraste algo sin querer):
 
 ```bash
-python -m src.ejecutar_todo --force
+uv run python guardar_salida.py --force
 ```
