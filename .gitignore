@@ -1,0 +1,13 @@
+# Python environments and generated cache files
+venv/
+.venv/
+__pycache__/
+*.py[cod]
+
+# Run logs and temporary files
+*.log
+*.log.*
+tmp_check.txt
+
+# Keep the assignment PDF out of the repository
+Parcial 1.pdf

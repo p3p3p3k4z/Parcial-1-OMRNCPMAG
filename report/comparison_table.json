@@ -1,0 +1,14 @@
+{
+  "Accuracy en Test": {
+    "Baseline": 0.6626666784286499,
+    "Optimizada": 0.7064999938011169
+  },
+  "Parametros entrenables": {
+    "Baseline": 315722,
+    "Optimizada": 218186
+  },
+  "Tiempo de entrenamiento (s)": {
+    "Baseline": 101.69585013389587,
+    "Optimizada": 433.24795365333557
+  }
+}

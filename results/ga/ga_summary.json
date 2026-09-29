@@ -1,0 +1,37 @@
+{
+  "population_size": 12,
+  "num_generations": 12,
+  "individual_epochs": 5,
+  "total_time_seconds": 6379.205260515213,
+  "best_chromosome": [
+    0.001,
+    32.0,
+    1.0,
+    3.0,
+    128.0,
+    64.0,
+    128.0,
+    3.0,
+    128.0,
+    0.2
+  ],
+  "best_chromosome_str": "lr=0.001, batch=32, opt=rmsprop, conv_layers=3, filters=[128, 64, 128], kernel=3, dense=128, dropout=0.2",
+  "best_params": {
+    "learning_rate": 0.001,
+    "batch_size": 32,
+    "optimizer": 1,
+    "n_conv_layers": 3,
+    "requested_n_conv_layers": 3,
+    "filters": [
+      128,
+      64,
+      128
+    ],
+    "kernel_size": 3,
+    "dense_units": 128,
+    "dropout": 0.2
+  },
+  "best_fitness": 0.7254550139077505,
+  "best_val_accuracy": 0.6979166865348816,
+  "best_trainable_params": 218186
+}
