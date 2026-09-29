@@ -1,123 +1,98 @@
 """
-Configuración global del proyecto: Optimización Multiobjetivo de CNN mediante
-Algoritmos Genéticos (pyGAD) sobre CIFAR-10.
+config.py - Configuracion Global del Proyecto
+Parcial 1: Optimizacion de CNN con Algoritmos Geneticos (CIFAR-10)
 
-Todas las constantes que definen el protocolo experimental obligatorio del
-enunciado (Parcial 1 - Computación Flexible) están centralizadas aquí para
-garantizar reproducibilidad entre las distintas fases del experimento.
+Proposito:
+Centralizar las constantes del experimento para evitar valores magicos 
+dispersos por el codigo.
+
+Glosario:
+- SEED: Numero fijo que hace los experimentos reproducibles.
+- CIFAR-10: Dataset de 60,000 imagenes divididas en 10 clases.
+- Baseline: La red de referencia sin optimizar para comparar resultados.
+- GA / AG: Algoritmo Genetico, tecnica de optimizacion.
+- Fitness: Puntuacion que evalua la calidad de una solucion.
+- TP (Parametros Entrenables): Numero de pesos que la red ajusta.
 """
 import os
 
-# ---------------------------------------------------------------------------
-# Rutas
-# ---------------------------------------------------------------------------
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-RESULTS_DIR = os.path.join(BASE_DIR, "results")
-BASELINE_DIR = os.path.join(RESULTS_DIR, "baseline")
-GA_DIR = os.path.join(RESULTS_DIR, "ga")
-FINAL_DIR = os.path.join(RESULTS_DIR, "final")
-REPORT_DIR = os.path.join(BASE_DIR, "report")
+DIRECTORIO_BASE    = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DIRECTORIO_RESULTS = os.path.join(DIRECTORIO_BASE, "results")
+DIRECTORIO_BASE_   = os.path.join(DIRECTORIO_RESULTS, "baseline")
+DIRECTORIO_GA      = os.path.join(DIRECTORIO_RESULTS, "ga")
+DIRECTORIO_FINAL   = os.path.join(DIRECTORIO_RESULTS, "final")
+DIRECTORIO_REPORTE = os.path.join(DIRECTORIO_BASE, "report")
 
-for d in (RESULTS_DIR, BASELINE_DIR, GA_DIR, FINAL_DIR, REPORT_DIR):
-    os.makedirs(d, exist_ok=True)
+for directorio in (
+    DIRECTORIO_RESULTS,
+    DIRECTORIO_BASE_,
+    DIRECTORIO_GA,
+    DIRECTORIO_FINAL,
+    DIRECTORIO_REPORTE,
+):
+    os.makedirs(directorio, exist_ok=True)
 
-# ---------------------------------------------------------------------------
-# Reproducibilidad
-# ---------------------------------------------------------------------------
+
 SEED = 42
 
-# ---------------------------------------------------------------------------
-# División del dataset (fija durante todo el experimento)
-# ---------------------------------------------------------------------------
-TRAIN_FRAC = 0.60
-VAL_FRAC = 0.20
-TEST_FRAC = 0.20
+FRACCION_TRAIN = 0.60
+FRACCION_VAL   = 0.20
+FRACCION_TEST  = 0.20
 
-NUM_CLASSES = 10
-INPUT_SHAPE = (32, 32, 3)
-CLASS_NAMES = [
-    "airplane", "automobile", "bird", "cat", "deer",
-    "dog", "frog", "horse", "ship", "truck",
+NUM_CLASES   = 10
+FORMA_IMAGEN = (32, 32, 3)
+NOMBRES_CLASES = [
+    "avion", "automovil", "pajaro", "gato", "venado",
+    "perro", "rana", "caballo", "barco", "camion",
 ]
 
-# ---------------------------------------------------------------------------
-# Arquitectura Baseline (idéntica a la utilizada en clase)
-# ---------------------------------------------------------------------------
-BASELINE_FILTER1_SIZE = 32
-BASELINE_FILTER2_SIZE = 64
-BASELINE_FILTER_SHAPE = (3, 3)
-BASELINE_POOL_SHAPE = (2, 2)
-BASELINE_FULLY_CONNECT_NUM = 128
-BASELINE_EPOCHS = 30
-BASELINE_BATCH_SIZE = 64
-BASELINE_LEARNING_RATE = 0.001
+# Arquitectura Baseline (Fase 1)
+# Estructura: Entrada -> 2 bloques (Conv2D + MaxPooling) -> Flatten -> Dense -> Salida
+BASELINE_FILTROS_CAPA1    = 32
+BASELINE_FILTROS_CAPA2    = 64
+BASELINE_FORMA_FILTRO     = (3, 3)
+BASELINE_FORMA_POOLING    = (2, 2)
+BASELINE_NEURONAS_DENSA   = 128
+BASELINE_EPOCAS           = 30
+BASELINE_BATCH_SIZE       = 64
+BASELINE_TASA_APRENDIZAJE = 0.001
 
-# ---------------------------------------------------------------------------
-# Protocolo experimental del Algoritmo Genético (pyGAD)
-# ---------------------------------------------------------------------------
-GA_POPULATION_SIZE = 12          # >= 10 (mínimo exigido por el enunciado)
-GA_NUM_GENERATIONS = 12          # >= 10 (mínimo exigido por el enunciado)
-GA_NUM_PARENTS_MATING = 6
-GA_INDIVIDUAL_EPOCHS = 5         # épocas de entrenamiento por individuo
-GA_KEEP_ELITISM = 2
-GA_MUTATION_PERCENT_GENES = 25
-GA_CROSSOVER_TYPE = "single_point"
-GA_MUTATION_TYPE = "random"
-GA_PARENT_SELECTION_TYPE = "sss"  # steady-state selection
 
-FINAL_RETRAIN_EPOCHS = 30
+# Parametros del Algoritmo Genetico (Fase 2)
+# Poblacion: Conjunto de soluciones candidatas evaluadas.
+# Generacion: Un ciclo de evaluacion, seleccion, cruce y mutacion.
+# Elitismo: Mejores individuos que pasan sin cambios a la siguiente generacion.
+GA_TAMANIO_POBLACION   = 12
+GA_NUM_GENERACIONES    = 12
+GA_NUM_PADRES          = 6
+GA_EPOCAS_INDIVIDUO    = 5
+GA_ELITISMO            = 2
+GA_PORCENTAJE_MUTACION = 25
+GA_TIPO_CRUCE          = "single_point"
+GA_TIPO_MUTACION       = "random"
+GA_SELECCION_PADRES    = "sss"
 
-# ---------------------------------------------------------------------------
-# Restricciones arquitectónicas del espacio de búsqueda genético
-# ---------------------------------------------------------------------------
-MAX_CONV_LAYERS = 3
-MIN_CONV_LAYERS = 1
+EPOCAS_REENTRENAMIENTO_FINAL = 30
 
-# ---------------------------------------------------------------------------
-# Función de fitness multiobjetivo
-#
+MAX_CAPAS_CONV = 3
+MIN_CAPAS_CONV = 1
+
+# Funcion de Fitness Multiobjetivo
 # fitness = w1 * val_accuracy + w2 * (1 - (TP - TP_min) / (TP_max - TP_min))
-#
-# NOTA METODOLÓGICA 1 (signo de la fórmula): el enunciado escribe el segundo
-# término como "1 + (TP - TP_min) / (TP_max - TP_min)", pero su propio
-# ejemplo numérico resuelto (val_accuracy=0.91, TP=5230 -> fitness=0.9242)
-# solo es consistente con un signo "menos": 0.637 + 0.3*(1 - 4230/99000) =
-# 0.9242. Usar "+" penalizaría con un fitness MAYOR a las redes con MÁS
-# parámetros, lo cual contradice el objetivo explícito de "minimizar la
-# cantidad de parámetros". Se implementa la versión con "-", única
-# compatible con (a) el objetivo de minimización declarado y (b) el ejemplo
-# numérico provisto en el propio enunciado.
-#
-# NOTA METODOLÓGICA 2 (TP_min / TP_max): el enunciado sugiere TP_min=1000 y
-# TP_max=100000 solo a modo de EJEMPLO para ilustrar el cálculo de la
-# fórmula. El propio enunciado exige justificar técnicamente estos valores,
-# por lo que se recalibraron empíricamente para el espacio de búsqueda
-# realmente usado en este proyecto (arquitecturas Flatten+Dense, 1-3 capas
-# Conv2D+MaxPooling2D, 16-256 filtros, kernel 3 o 5, densa 64-512):
-#   - Se enumeraron 120 combinaciones representativas del espacio de
-#     búsqueda; el número de parámetros entrenables osciló entre ~9,900
-#     (1 capa conv, 16 filtros, densa 64) y ~29.5 millones (1 capa conv,
-#     256 filtros, densa 512) -- la arquitectura baseline usada en clase
-#     tiene 315,722 parámetros entrenables.
-#   - Los valores TP_min=1000 / TP_max=100000 del ejemplo del enunciado son
-#     demasiado pequeños para este espacio (incluso el baseline los supera
-#     ampliamente), por lo que con ellos el término de complejidad se
-#     saturaría (clip) en 0 para casi cualquier arquitectura, anulando de
-#     facto su capacidad discriminante.
-#   - Se eligen en su lugar TP_min=10,000 (cercano a la arquitectura más
-#     pequeña del espacio) y TP_max=1,000,000 (por encima del baseline,
-#     cubriendo la gran mayoría de arquitecturas "razonables" del espacio
-#     de búsqueda, dejando que solo las combinaciones más extremas -1 capa
-#     conv con muchos filtros y una capa densa muy grande- saturen la
-#     penalización a su valor máximo).
-# El valor normalizado se recorta (clip) a [0, 1] para evitar fitness fuera
-# de rango en arquitecturas fuera de estos límites.
-# ---------------------------------------------------------------------------
-FITNESS_W1 = 0.7   # peso de val_accuracy
-FITNESS_W2 = 0.3   # peso de la penalización por complejidad (parámetros)
-TP_MIN = 10000
-TP_MAX = 1000000
+# Se resta la eficiencia para premiar redes compactas (con pocos parametros).
+# TP_min y TP_max normalizan el termino de eficiencia al rango 0 a 1.
+FITNESS_W1 = 0.7
+FITNESS_W2 = 0.3
+TP_MIN = 10_000
+TP_MAX = 1_000_000
 
-assert abs(FITNESS_W1 + FITNESS_W2 - 1.0) < 1e-9, "w1 + w2 debe ser 1"
+assert abs(FITNESS_W1 + FITNESS_W2 - 1.0) < 1e-9, (
+    f"w1 + w2 debe ser 1.0, pero es {FITNESS_W1 + FITNESS_W2}"
+)
 
-OPTIMIZER_MAP = {0: "adam", 1: "rmsprop", 2: "sgd"}
+# Traduccion de indice genetico al nombre del optimizador en Keras
+MAPA_OPTIMIZADOR = {
+    0: "adam",
+    1: "rmsprop",
+    2: "sgd",
+}
