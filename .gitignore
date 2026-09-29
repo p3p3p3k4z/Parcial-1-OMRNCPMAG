@@ -4,11 +4,5 @@ venv/
 __pycache__/
 *.py[cod]
 
-# Run logs and temporary files
-*.log
-*.log.*
-tmp_check.txt
-logs/
-
 # Keep the assignment PDF out of the repository
 Parcial 1.pdf

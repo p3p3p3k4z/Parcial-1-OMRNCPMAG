@@ -1,0 +1,6 @@
+=================================================================
+ REGISTRO DE SALIDA INICIADO
+ Fecha: 2026-09-29 00:35:53
+ Archivo: /home/m4r10/Documents/Parcial-1-OMRNCPMAG/logs/pipeline_20260929_003553.txt
+ Copia reciente: /home/m4r10/Documents/Parcial-1-OMRNCPMAG/logs/ultima_ejecucion.txt
+=================================================================

@@ -1,0 +1,15 @@
+=================================================================
+ REGISTRO DE SALIDA INICIADO
+ Fecha: 2026-09-29 06:15:23
+ Archivo: /home/m4r10/Documents/Parcial-1-OMRNCPMAG/logs/pipeline_20260929_061523.txt
+ Copia reciente: /home/m4r10/Documents/Parcial-1-OMRNCPMAG/logs/ultima_ejecucion.txt
+=================================================================
+
+FASE 1/5: Evaluacion de la Red Base (Baseline)
+Resultados del baseline ya existen. Omitiendo.
+
+FASE 2/5: Optimizacion con AG + Seleccion del Mejor Individuo
+Inicio del Algoritmo Genetico con pyGAD
+Poblacion: 12 | Generaciones: 12
+Epocas por individuo: 5 | Genes: 10
+ [gen 00 | ind 00] acc=0.4967 TP= 84,586 fitness=0.6251 (29.6s)
