@@ -23,15 +23,22 @@ results/
 └── final/                  → resultados_optimizado.json  |  modelo_optimizado.keras
 
 report/
-├── generar_reporte.py      → Genera el documento DOCX
 ├── fig_fitness_evolution.png
 ├── fig_learning_curves_baseline.png
 ├── fig_learning_curves_optimized.png
 ├── fig_accuracy_vs_params.png
 └── comparison_table.json
 
-docs/                       → Guias de estudio y glosarios pedagogicos
-codigo_obsoleto/            → Versiones antiguas del codigo (no se ejecutan)
+logs/
+├── pipeline_YYYYMMDD_HHMMSS.txt  → Registro con fecha de cada ejecucion
+└── ultima_ejecucion.txt          → Copia de la ejecucion mas reciente
+
+reporte/
+└── crear_latex.py              → Generador automatico del reporte tecnico en LaTeX
+
+guardar_salida.py               → Wrapper para guardar la salida de consola en .txt
+docs/                           → Guias de estudio y glosarios pedagogicos
+codigo_obsoleto/                → Versiones antiguas del codigo (no se ejecutan)
 ```
 
 ---
@@ -60,6 +67,24 @@ fitness = w1 * val_accuracy + w2 * (1 - (TP - TP_min) / (TP_max - TP_min))
 
 ## Instalacion
 
+### Opcion 1: Usando uv (Recomendado - Super rapido)
+
+```bash
+# 1. Instalar uv (si no lo tienes instalado)
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# 2. Crear entorno virtual
+uv venv
+
+# 3. Activar el entorno virtual
+source .venv/bin/activate
+
+# 4. Instalar dependencias super rapido
+uv pip install -r requirements.txt
+```
+
+### Opcion 2: Usando pip clasico (venv)
+
 ```bash
 python3.11 -m venv venv
 source venv/bin/activate
@@ -71,6 +96,8 @@ pip install -r requirements.txt
 ---
 
 ## Como Ejecutar
+
+> **💡 Tip para usuarios de `uv`:** Si usaste `uv` para la instalacion, puedes anteponer `uv run` a cualquier comando (ej. `uv run python guardar_salida.py`) para ejecutar sin necesidad de activar manualmente el entorno con `source`.
 
 ### Pipeline completo (5 fases en secuencia):
 
@@ -96,6 +123,28 @@ python -m src.algoritmo_genetico    # Solo Fases 2 y 3 (GA)
 python -m src.reentrenamiento       # Solo Fase 4 y 5 (reentrenamiento + test)
 python -m src.comparativa           # Solo Fase 5 (graficas y tabla)
 ```
+
+### Guardar la salida de consola en archivo .txt:
+
+El script `guardar_salida.py` ejecuta el pipeline y guarda automaticamente
+todo lo que aparece en consola (barras de progreso, resultados por generacion,
+metricas finales, etc.) en un archivo de texto dentro de `logs/`.
+
+```bash
+# Ejecutar el pipeline y guardar toda la salida en logs/
+python guardar_salida.py
+
+# Con las mismas opciones que python -m src.ejecutar_todo
+python guardar_salida.py --force
+python guardar_salida.py --poblacion 15 --generaciones 15
+
+# Con un nombre personalizado para el archivo de log
+python guardar_salida.py --solo-log mi_experimento
+```
+
+Archivos generados:
+- `logs/pipeline_20260929_060000.txt` — Registro con fecha y hora
+- `logs/ultima_ejecucion.txt` — Siempre contiene la ejecucion mas reciente
 
 ---
 
